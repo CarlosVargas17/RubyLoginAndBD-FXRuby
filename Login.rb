@@ -1,6 +1,7 @@
 require_relative "JOIN"
 require "fox16"
 require 'mysql2'
+require_relative 'tipo'
 include Fox
 class Programa < FXMainWindow
   def initialize(app,tipo)
@@ -11,6 +12,12 @@ class Programa < FXMainWindow
     full.backColor= FXRGB(165,249,229)
     #self.backColor = app.backColor="black"
     yesicon =FXPNGIcon.new(app, File.open("yes2.png", "rb").read)
+    boton_volver_icon =FXPNGIcon.new(app, File.open("flecha_icono.png", "rb").read)
+    boton_volver=FXButton.new(self,"",:icon=>boton_volver_icon, :opts=>LAYOUT_EXPLICIT|JUSTIFY_CENTER_X, :width=>66, :height=>66,:x=>0, :y=>0)
+    boton_volver.backColor= FXRGB(165,249,229)
+    boton_volver.connect(SEL_COMMAND) do
+      volver()
+    end
     if tipo=="Alumno"
       lbl0=FXLabel.new(self,"Usuario #{tipo}",:opts=>LAYOUT_EXPLICIT|JUSTIFY_CENTER_X, :width=>300, :height=>50, :x=>50, :y=>0)
       lbl0.backColor= FXRGB(47, 167, 78)
@@ -22,7 +29,7 @@ class Programa < FXMainWindow
       lbl0.textColor = FXRGB(255,255,255)
     end
     if tipo=="Administrador"
-      lbl0=FXLabel.new(self,"Usuario #{tipo}",:opts=>LAYOUT_EXPLICIT|JUSTIFY_CENTER_X, :width=>300, :height=>50, :x=>50, :y=>0)
+      lbl0=FXLabel.new(self,"Usuario #{tipo}",:opts=>LAYOUT_EXPLICIT|JUSTIFY_CENTER_X, :width=>300, :height=>50, :x=>80, :y=>0)
       lbl0.backColor= FXRGB(6, 123, 249)
       lbl0.textColor = FXRGB(255,255,255)
     end
@@ -58,9 +65,20 @@ class Programa < FXMainWindow
     user_value=@user.text #OBTENER EL VALOR DE TIPO TEXTO DE LOS INPUTS
     pass_value=@pass.text
     verificar(user_value,pass_value,tipo)
+
+
+
+
     end
 
 
+  end
+
+  def volver()
+    volver_win=Usuarios.new(@app)
+    volver_win.create
+    volver_win.show(PLACEMENT_SCREEN)
+    self.close
   end
 
 
@@ -97,6 +115,7 @@ class Programa < FXMainWindow
     end
 
     results=conn.query(consulta)
+
     results.each do |row|
       c+=1
       id=row[identi]
@@ -106,26 +125,29 @@ class Programa < FXMainWindow
       arreglo.push([id,username,pass,name])
     end
     i=0
-
-    while i<=c
+    si=0
+    while i<arreglo.length
       if user==arreglo[i][1]
-
         if password==arreglo[i][2]
           nombre=arreglo[i][3]
           ide=arreglo[i][0]
           invoque_window(nombre,tipo,ide)
-          i=c+10
-        else
+          i=9999999
+          si=1
+        elsif password!=arreglo[i][2]
           FXMessageBox.information(self,MBOX_OK,"Atencion","Contraseña incorrecta")
+          si=1
         end
-      elsif user=="" or password==""
-        FXMessageBox.information(self,MBOX_OK,"Atencion","Asegurate de no dejar espacios vacios")
+
+
       end
       i+=1
     end
-
-
-  end
-
+    if i==arreglo.length and si==0
+      FXMessageBox.information(self,MBOX_OK,"Atencion","Usuario incorrecto")
+    end
+    end
 
 end
+
+

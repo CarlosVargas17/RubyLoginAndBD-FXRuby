@@ -10,6 +10,15 @@ class Usuarios <FXMainWindow
     full.backColor= FXRGB(165,249,229)
 
     helvetica = FXFont.new(app, "helvetica", 14)
+
+    boton_volver_icon =FXPNGIcon.new(app, File.open("exit.png", "rb").read)
+    boton_volver=FXButton.new(self,"",:icon=>boton_volver_icon, :opts=>LAYOUT_EXPLICIT|JUSTIFY_CENTER_X, :width=>66, :height=>66,:x=>0, :y=>0)
+    boton_volver.backColor= FXRGB(165,249,229)
+    boton_volver.connect(SEL_COMMAND) do
+      volver()
+    end
+
+    
     lbl=FXLabel.new( self,"Selecciona un tipo de Usuario", :opts=>LAYOUT_EXPLICIT, :width=>300, :height=>50, :x=>93, :y=>20)
     lbl.backColor= FXRGB(165,249,229)
     lbl.font = helvetica
@@ -49,6 +58,15 @@ class Usuarios <FXMainWindow
       redirigir(tipo)
     end
 
+
+  end
+
+  def volver()
+
+    answer=FXMessageBox.question(self,MBOX_YES_NO,"Atención","¿Deseas salir?")
+    if answer == MBOX_CLICKED_YES
+      self.close
+    end
 
   end
 

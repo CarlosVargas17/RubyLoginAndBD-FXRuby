@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-03-2021 a las 10:29:54
+-- Tiempo de generación: 25-03-2021 a las 10:02:23
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -24,20 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `administrador`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `administrador` (
-`ID_Admin` int(11)
-,`Nombre` varchar(150)
-,`Apellido` varchar(150)
-,`Username` varchar(100)
-,`Password` varchar(150)
-);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `administradores`
 --
 
@@ -54,21 +40,7 @@ CREATE TABLE `administradores` (
 --
 
 INSERT INTO `administradores` (`ID_Admin`, `Nombre`, `Apellido`, `Username`, `Password`) VALUES
-(1, 'Admin', 'Admin', 'Admin', 'Admin');
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `alumno`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `alumno` (
-`ID_Alumno` int(11)
-,`Nombre` varchar(150)
-,`Apellido` varchar(100)
-,`Username` varchar(20)
-,`Password` varchar(150)
-);
+(1, 'Director', 'Principal', 'Admin', '12345');
 
 -- --------------------------------------------------------
 
@@ -81,29 +53,37 @@ CREATE TABLE `alumnos` (
   `Nombre` varchar(150) NOT NULL,
   `Apellido` varchar(100) NOT NULL,
   `Username` varchar(20) NOT NULL,
-  `Password` varchar(150) NOT NULL
+  `Password` varchar(150) NOT NULL,
+  `Carrera` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `alumnos`
 --
 
-INSERT INTO `alumnos` (`ID_Alumno`, `Nombre`, `Apellido`, `Username`, `Password`) VALUES
-(1, 'Mayra', 'Gomez', 'Z17020069', '12345'),
-(2, 'Carlos', 'Vargas', 'Z17020048', '12345');
+INSERT INTO `alumnos` (`ID_Alumno`, `Nombre`, `Apellido`, `Username`, `Password`, `Carrera`) VALUES
+(3, 'Carlos', 'Vargas', 'Z17020048', '12345', 'ISC'),
+(4, 'Mayra', 'Gomez', 'Z17020069', '12345', 'ISC');
 
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `calificacion`
--- (Véase abajo para la vista actual)
+-- Estructura de tabla para la tabla `asignaciones`
 --
-CREATE TABLE `calificacion` (
-`ID_Materia` int(11)
-,`ID_Maestro` int(11)
-,`ID_Alumno` int(11)
-,`Calificacion` varchar(10)
-);
+
+CREATE TABLE `asignaciones` (
+  `ID_Asignacion` int(11) NOT NULL,
+  `ID_Materia` int(11) NOT NULL,
+  `ID_Maestro` int(11) NOT NULL,
+  `ID_Alumno` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `asignaciones`
+--
+
+INSERT INTO `asignaciones` (`ID_Asignacion`, `ID_Materia`, `ID_Maestro`, `ID_Alumno`) VALUES
+(9, 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -118,19 +98,12 @@ CREATE TABLE `calificaciones` (
   `Calificacion` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
+--
+-- Volcado de datos para la tabla `calificaciones`
+--
 
---
--- Estructura Stand-in para la vista `maestro`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `maestro` (
-`ID_Maestro` int(11)
-,`Nombre` varchar(150)
-,`Apellido` varchar(150)
-,`Username` varchar(100)
-,`Password` varchar(150)
-);
+INSERT INTO `calificaciones` (`ID_Materia`, `ID_Maestro`, `ID_Alumno`, `Calificacion`) VALUES
+(1, 1, 3, '85');
 
 -- --------------------------------------------------------
 
@@ -151,20 +124,8 @@ CREATE TABLE `maestros` (
 --
 
 INSERT INTO `maestros` (`ID_Maestro`, `Nombre`, `Apellido`, `Username`, `Password`) VALUES
-(1, 'Estrella', 'Gonzales', 'Estrella1', '12345');
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `materia`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `materia` (
-`ID_Materia` int(11)
-,`Nombre_Materia` varchar(150)
-,`ID_Maestro` int(11)
-,`ID_Alumno` int(11)
-);
+(1, 'Estrella', 'Gonzales', 'Estrella1', '12345'),
+(2, 'Rafael', 'Campa', 'Campa1', '123');
 
 -- --------------------------------------------------------
 
@@ -174,55 +135,17 @@ CREATE TABLE `materia` (
 
 CREATE TABLE `materias` (
   `ID_Materia` int(11) NOT NULL,
-  `Nombre_Materia` varchar(150) NOT NULL,
-  `ID_Maestro` int(11) NOT NULL,
-  `ID_Alumno` int(11) NOT NULL
+  `Nombre_Materia` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
 --
--- Estructura para la vista `administrador`
+-- Volcado de datos para la tabla `materias`
 --
-DROP TABLE IF EXISTS `administrador`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `administrador`  AS  select `administradores`.`ID_Admin` AS `ID_Admin`,`administradores`.`Nombre` AS `Nombre`,`administradores`.`Apellido` AS `Apellido`,`administradores`.`Username` AS `Username`,`administradores`.`Password` AS `Password` from `administradores` ;
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `alumno`
---
-DROP TABLE IF EXISTS `alumno`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `alumno`  AS  select `alumnos`.`ID_Alumno` AS `ID_Alumno`,`alumnos`.`Nombre` AS `Nombre`,`alumnos`.`Apellido` AS `Apellido`,`alumnos`.`Username` AS `Username`,`alumnos`.`Password` AS `Password` from `alumnos` ;
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `calificacion`
---
-DROP TABLE IF EXISTS `calificacion`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calificacion`  AS  select `calificaciones`.`ID_Materia` AS `ID_Materia`,`calificaciones`.`ID_Maestro` AS `ID_Maestro`,`calificaciones`.`ID_Alumno` AS `ID_Alumno`,`calificaciones`.`Calificacion` AS `Calificacion` from `calificaciones` ;
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `maestro`
---
-DROP TABLE IF EXISTS `maestro`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `maestro`  AS  select `maestros`.`ID_Maestro` AS `ID_Maestro`,`maestros`.`Nombre` AS `Nombre`,`maestros`.`Apellido` AS `Apellido`,`maestros`.`Username` AS `Username`,`maestros`.`Password` AS `Password` from `maestros` ;
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `materia`
---
-DROP TABLE IF EXISTS `materia`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `materia`  AS  select `materias`.`ID_Materia` AS `ID_Materia`,`materias`.`Nombre_Materia` AS `Nombre_Materia`,`materias`.`ID_Maestro` AS `ID_Maestro`,`materias`.`ID_Alumno` AS `ID_Alumno` from `materias` ;
+INSERT INTO `materias` (`ID_Materia`, `Nombre_Materia`) VALUES
+(1, 'Programacion Logica y Funcional'),
+(2, 'Comercialización de Software'),
+(4, 'POO');
 
 --
 -- Índices para tablas volcadas
@@ -239,6 +162,15 @@ ALTER TABLE `administradores`
 --
 ALTER TABLE `alumnos`
   ADD PRIMARY KEY (`ID_Alumno`);
+
+--
+-- Indices de la tabla `asignaciones`
+--
+ALTER TABLE `asignaciones`
+  ADD PRIMARY KEY (`ID_Asignacion`),
+  ADD KEY `ID_Materia` (`ID_Materia`),
+  ADD KEY `ID_Maestro` (`ID_Maestro`),
+  ADD KEY `ID_Alumno` (`ID_Alumno`);
 
 --
 -- Indices de la tabla `calificaciones`
@@ -258,9 +190,7 @@ ALTER TABLE `maestros`
 -- Indices de la tabla `materias`
 --
 ALTER TABLE `materias`
-  ADD PRIMARY KEY (`ID_Materia`),
-  ADD KEY `ID_Alumno` (`ID_Alumno`),
-  ADD KEY `ID_Maestro` (`ID_Maestro`) USING BTREE;
+  ADD PRIMARY KEY (`ID_Materia`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -276,38 +206,45 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `ID_Alumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Alumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `asignaciones`
+--
+ALTER TABLE `asignaciones`
+  MODIFY `ID_Asignacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `maestros`
 --
 ALTER TABLE `maestros`
-  MODIFY `ID_Maestro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_Maestro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `materias`
 --
 ALTER TABLE `materias`
-  MODIFY `ID_Materia` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Materia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
+-- Filtros para la tabla `asignaciones`
+--
+ALTER TABLE `asignaciones`
+  ADD CONSTRAINT `asignaciones_ibfk_1` FOREIGN KEY (`ID_Alumno`) REFERENCES `alumnos` (`ID_Alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `asignaciones_ibfk_2` FOREIGN KEY (`ID_Maestro`) REFERENCES `maestros` (`ID_Maestro`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `asignaciones_ibfk_3` FOREIGN KEY (`ID_Materia`) REFERENCES `materias` (`ID_Materia`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `calificaciones`
 --
 ALTER TABLE `calificaciones`
-  ADD CONSTRAINT `Alumno` FOREIGN KEY (`ID_Alumno`) REFERENCES `alumnos` (`ID_Alumno`),
-  ADD CONSTRAINT `Maestro` FOREIGN KEY (`ID_Maestro`) REFERENCES `maestros` (`ID_Maestro`),
-  ADD CONSTRAINT `Materia` FOREIGN KEY (`ID_Materia`) REFERENCES `materias` (`ID_Materia`);
-
---
--- Filtros para la tabla `materias`
---
-ALTER TABLE `materias`
-  ADD CONSTRAINT `Alumnos` FOREIGN KEY (`ID_Alumno`) REFERENCES `alumnos` (`ID_Alumno`),
-  ADD CONSTRAINT `Maestros` FOREIGN KEY (`ID_Maestro`) REFERENCES `maestros` (`ID_Maestro`);
+  ADD CONSTRAINT `Alumno` FOREIGN KEY (`ID_Alumno`) REFERENCES `alumnos` (`ID_Alumno`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Maestro` FOREIGN KEY (`ID_Maestro`) REFERENCES `maestros` (`ID_Maestro`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Materia` FOREIGN KEY (`ID_Materia`) REFERENCES `materias` (`ID_Materia`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
