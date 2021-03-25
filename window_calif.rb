@@ -82,21 +82,36 @@ class WindowCalificar < FXMainWindow
     @combo=FXComboBox.new(self ,c,:opts=>LAYOUT_EXPLICIT|TEXTFIELD_NORMAL,:width=>200,:height=>30,:x=>150,:y=>80)
     @combo.numVisible=c
     @combo.editable =false
-    i=0
-    while i<c
-      materia=arreglo[i][0]
-      @combo.appendItem(materia)
-      i=i+1
+    if arreglo==[]
+      @combo.text="No hay materias asignadas"
+    else
+      i=0
+      while i<c
+        materia=arreglo[i][0]
+        @combo.appendItem(materia)
+        i=i+1
+      end
     end
 
 
+
     button_Ctrl.connect(SEL_COMMAND) do
-      search_alumn(id_maestro)
+      if @combo.text=="No hay materias asignadas"
+        FXMessageBox.information(self,MBOX_OK,"Atención","No hay calificaciones asignadas")
+
+      else
+        search_alumn(id_maestro)
+      end
     end
 
 
     button_Visual.connect(SEL_COMMAND) do
-      ver_calificaciones
+      if @combo.text=="No hay materias asignadas"
+        FXMessageBox.information(self,MBOX_OK,"Atención","No hay calificaciones asignadas")
+      else
+        ver_calificaciones
+      end
+
     end
 
     button_Regis.connect(SEL_COMMAND) do
