@@ -15,7 +15,7 @@ class JOIN < FXMainWindow
     name=name
     id=id.to_s
     logoicon =FXPNGIcon.new(app, File.open("school2.png", "rb").read)
-    full=super(app,"Inicio",:icon => logoicon, :width=>600, :height=>400)
+    full=super(app,"Inicio",:icon => logoicon,:opts => LAYOUT_FILL, :width=>600, :height=>400)
     full.backColor= FXRGB(165,249,229)
     helvetica = FXFont.new(app, "helvetica", 14)
     helvetica2 = FXFont.new(app, "helvetica", 18, :slant => FXFont::Italic)

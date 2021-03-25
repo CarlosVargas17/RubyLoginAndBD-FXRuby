@@ -5,9 +5,10 @@ class WindowView < FXMainWindow
   def initialize(app,id_alumno)
     @id_alumno=id_alumno
     full_icon=FXPNGIcon.new(app, File.open("school2.png", "rb").read)
+        x_icon=FXPNGIcon.new(app, File.open("cancelar.png", "rb").read)
+    
     full=super(app,"Ver calificaciones",:icon => full_icon, :width=>600, :height=>400)
-    full.backColor= FXRGB(166,189,241)
-
+        full.backColor= FXRGB(166,189,241)
     helvetica = FXFont.new(app, "helvetica", 10)
     helvetica2 = FXFont.new(app, "helvetica", 12)
 

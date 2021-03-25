@@ -7,8 +7,10 @@ class WindowdeleteDoc <FXMainWindow
     helvetica = FXFont.new(app, "helvetica", 10)
     helvetica2 = FXFont.new(app, "helvetica", 18)
     full_icon=FXPNGIcon.new(app, File.open("school2.png", "rb").read)
+    x_icon=FXPNGIcon.new(app, File.open("cancelar.png", "rb").read)
     full=super(app,"Elimina docente", :icon => full_icon,:width=>600, :height=>220)
     full.backColor= FXRGB(208,189,241)
+
     conn=Mysql2::Client.new(:host => "localhost", :username => "root",:database =>"escuela")
     @conn=conn
 

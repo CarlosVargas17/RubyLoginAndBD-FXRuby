@@ -6,12 +6,15 @@ class WindowViewMat < FXMainWindow
   def initialize(app)
 
     full_icon=FXPNGIcon.new(app, File.open("school2.png", "rb").read)
+        x_icon=FXPNGIcon.new(app, File.open("cancelar.png", "rb").read)
+    
     full=super(app,"Lista de Materias", :icon => full_icon,:width=>650, :height=>300)
-    full.backColor= FXRGB(166,189,241)
+        full.backColor= FXRGB(166,189,241)
+
 
 
     helvetica2 = FXFont.new(app, "helvetica", 14)
-    lbl_title=FXLabel.new( self,"Materias", :opts=>MATRIX_BY_COLUMNS|LAYOUT_FILL_X, :width=>600, :height=>50, :x=>0, :y=>5)
+    lbl_title=FXLabel.new( self,"Materias", :opts=>MATRIX_BY_COLUMNS|LAYOUT_FILL_X, :width=>600, :height=>60, :x=>0, :y=>5)
     lbl_title.font =helvetica2
     lbl_title.backColor= FXRGB(117,153,222)
     lista=[]
@@ -37,7 +40,8 @@ class WindowViewMat < FXMainWindow
     @tabla.visibleRows=c
     @tabla.setTableSize(c,2)
     @tabla.editable=false
-    @tabla.rowHeaderWidth = 30
+    @tabla.rowHeaderWidth = 0
+    @tabla.setColumnWidth(2,120)
 
     @tabla.setColumnText(0,"ID")
     @tabla.setColumnText(1,"Nombre")

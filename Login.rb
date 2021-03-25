@@ -8,7 +8,7 @@ class Programa < FXMainWindow
 
     @app=app #EL ARROBA PERMITE QUE LA VARIABLE SE VUELVA GLOBAL
     logoicon =FXPNGIcon.new(app, File.open("school2.png", "rb").read)
-    full=super(app,"LOGIN",:icon => logoicon, :width=>400, :height=>400)
+    full=super(app,"LOGIN",:icon => logoicon,:opts => LAYOUT_FILL, :width=>400, :height=>400)
     full.backColor= FXRGB(165,249,229)
     #self.backColor = app.backColor="black"
     yesicon =FXPNGIcon.new(app, File.open("yes2.png", "rb").read)

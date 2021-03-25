@@ -5,7 +5,9 @@ class Alumnos < FXMainWindow
   def initialize(app,id_maestro,materia,input_C,input_A,input_Carr)
 
     full_icon=FXPNGIcon.new(app, File.open("school2.png", "rb").read)
-    full=super(app,"Dashboard", :icon => full_icon,:width=>500, :height=>200)
+        x_icon=FXPNGIcon.new(app, File.open("cancelar.png", "rb").read)
+    
+    full=super(app,"Dashboard", :icon => full_icon,:opts => LAYOUT_FILL,:width=>500, :height=>200)
     full.backColor= FXRGB(198,241,166)
     @input_Ctrl=input_C
     @input_Alum=input_A

@@ -12,8 +12,11 @@ class WindowCalificar < FXMainWindow
     helvetica2 = FXFont.new(app, "helvetica", 18)
 
     full_icon=FXPNGIcon.new(app, File.open("school2.png", "rb").read)
+        x_icon=FXPNGIcon.new(app, File.open("cancelar.png", "rb").read)
+    
     full=super(app,"NEW", :icon => full_icon,:width=>600, :height=>400)
-    full.backColor= FXRGB(166,189,241)
+        full.backColor= FXRGB(166,189,241)
+
     conn=Mysql2::Client.new(:host => "localhost", :username => "root",:database =>"escuela")
     @conn=conn
 

@@ -8,12 +8,14 @@ class WindowViewA < FXMainWindow
     @id_materia=id_materia
 
     full_icon=FXPNGIcon.new(app, File.open("school2.png", "rb").read)
+        x_icon=FXPNGIcon.new(app, File.open("cancelar.png", "rb").read)
+    
     full=super(app,"Calificaciones de alumnos", :icon => full_icon,:width=>650, :height=>300)
-    full.backColor= FXRGB(166,189,241)
+        full.backColor= FXRGB(166,189,241)
 
 
     helvetica2 = FXFont.new(app, "helvetica", 14)
-    lbl_title=FXLabel.new( self,"Calificaciones de la materia  #{@materia}", :opts=>MATRIX_BY_COLUMNS|LAYOUT_FILL_X, :width=>600, :height=>50, :x=>0, :y=>5)
+    lbl_title=FXLabel.new( self,"Calificaciones de la materia  #{@materia}", :opts=>MATRIX_BY_COLUMNS|LAYOUT_FILL_X, :width=>600, :height=>60, :x=>0, :y=>5)
     lbl_title.font =helvetica2
     lbl_title.backColor= FXRGB(117,153,222)
 

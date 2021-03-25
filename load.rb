@@ -6,7 +6,7 @@ class Barra < FXMainWindow
   def initialize(app)
     @app=app
     logoicon =FXPNGIcon.new(app, File.open("school2.png", "rb").read)
-    full=super(app,"NEW", :icon => logoicon,:width=>500, :height=>280)
+    full=super(app,"NEW", :icon => logoicon,:opts => LAYOUT_FILL,:width=>500, :height=>280)
 
     @dataTarget=FXDataTarget.new(10)
     barra=FXProgressBar.new(full,@dataTarget,FXDataTarget::ID_VALUE,LAYOUT_SIDE_BOTTOM|LAYOUT_FILL_X|FRAME_SUNKEN|FRAME_THICK)
