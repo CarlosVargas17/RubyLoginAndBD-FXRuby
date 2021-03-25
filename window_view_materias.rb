@@ -41,7 +41,7 @@ class WindowViewMat < FXMainWindow
     @tabla.setTableSize(c,2)
     @tabla.editable=false
     @tabla.rowHeaderWidth = 0
-    @tabla.setColumnWidth(2,120)
+    @tabla.setColumnWidth(1,200)
 
     @tabla.setColumnText(0,"ID")
     @tabla.setColumnText(1,"Nombre")
