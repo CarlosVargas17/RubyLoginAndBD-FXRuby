@@ -6,7 +6,7 @@ class Usuarios <FXMainWindow
   def initialize(app)
     @app=app
     logoicon =FXPNGIcon.new(app, File.open("school2.png", "rb").read)
-    full=super(app,"Usuarios",:icon => logoicon,:opts => LAYOUT_FILL, :width=>500, :height=>280)
+    full=super(app,"Usuarios",:icon => logoicon, :width=>500, :height=>280)
     full.backColor= FXRGB(165,249,229)
 
     helvetica = FXFont.new(app, "helvetica", 14)

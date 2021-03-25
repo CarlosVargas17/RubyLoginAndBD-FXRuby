@@ -11,13 +11,9 @@ class Windowmaterias <FXMainWindow
     full_icon=FXPNGIcon.new(app, File.open("school2.png", "rb").read)
         x_icon=FXPNGIcon.new(app, File.open("cancelar.png", "rb").read)
     
-    full=super(app,"NEW", :icon => full_icon,:opts => LAYOUT_FILL,:width=>600, :height=>400)
+    full=super(app,"NEW", :icon => full_icon,:width=>600, :height=>400)
     full.backColor= FXRGB(208,189,241)
-    boton_volver=FXButton.new(self,"",:icon=>x_icon, :opts=>LAYOUT_EXPLICIT|JUSTIFY_CENTER_X, :width=>32, :height=>32,:x=>534, :y=>10)
-    boton_volver.backColor= FXRGB(117,153,222)
-    boton_volver.connect(SEL_COMMAND) do
-      self.close
-    end
+    
     conn=Mysql2::Client.new(:host => "localhost", :username => "root",:database =>"escuela")
     @conn=conn
 

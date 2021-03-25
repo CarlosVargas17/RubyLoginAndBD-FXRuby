@@ -7,7 +7,7 @@ class Alumnos < FXMainWindow
     full_icon=FXPNGIcon.new(app, File.open("school2.png", "rb").read)
         x_icon=FXPNGIcon.new(app, File.open("cancelar.png", "rb").read)
     
-    full=super(app,"Dashboard", :icon => full_icon,:opts => LAYOUT_FILL,:width=>500, :height=>200)
+    full=super(app,"Dashboard", :icon => full_icon,:width=>550, :height=>200)
     full.backColor= FXRGB(198,241,166)
     @input_Ctrl=input_C
     @input_Alum=input_A
@@ -16,7 +16,7 @@ class Alumnos < FXMainWindow
     helvetica = FXFont.new(app, "helvetica", 10)
     helvetica2 = FXFont.new(app, "helvetica", 10)
 
-    lbl_title=FXLabel.new( self,"NO. CONTROL DE ALUMNOS INSCRITOS A #{materia.upcase}", :opts=>LAYOUT_EXPLICIT, :width=>470, :height=>50, :x=>15, :y=>5)
+    lbl_title=FXLabel.new( self,"NO. CONTROL DE ALUMNOS INSCRITOS A #{materia.upcase}", :opts=>LAYOUT_EXPLICIT, :width=>520, :height=>50, :x=>15, :y=>5)
     lbl_title.font =helvetica2
     lbl_title.backColor= FXRGB(166,211,132)
 
