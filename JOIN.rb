@@ -18,17 +18,17 @@ class JOIN < FXMainWindow
     full=super(app,"Inicio",:icon => logoicon, :width=>600, :height=>400)
     full.backColor= FXRGB(165,249,229)
     helvetica = FXFont.new(app, "helvetica", 14)
-    helvetica2 = FXFont.new(app, "helvetica", 18)
+    helvetica2 = FXFont.new(app, "helvetica", 18, :slant => FXFont::Italic)
 
     boton_volver_icon =FXPNGIcon.new(app, File.open("exit.png", "rb").read)
-    boton_volver=FXButton.new(self,"",:icon=>boton_volver_icon, :opts=>LAYOUT_EXPLICIT|JUSTIFY_CENTER_X, :width=>66, :height=>66,:x=>0, :y=>0)
+    boton_volver=FXButton.new(self,"",:icon=>boton_volver_icon, :opts=>LAYOUT_EXPLICIT|JUSTIFY_CENTER_X, :width=>66, :height=>66,:x=>534, :y=>-10)
     boton_volver.backColor= FXRGB(165,249,229)
     boton_volver.connect(SEL_COMMAND) do
       volver()
     end
 
 
-    lbl=FXLabel.new( self,"BIENVENIDO #{name} \n ERES ROL DE #{tipo}, TU ID ES #{id}", :opts=>LAYOUT_EXPLICIT, :width=>560, :height=>50, :x=>10, :y=>20)
+    lbl=FXLabel.new( self,"BIENVENIDO #{name.upcase} \nTU ROL ES #{tipo.upcase}", :opts=>LAYOUT_EXPLICIT|JUSTIFY_CENTER_X, :width=>560, :height=>50, :x=>20, :y=>20)
     lbl.font = helvetica2
     lbl.backColor= FXRGB(165,249,229)
 

@@ -12,7 +12,7 @@ class Usuarios <FXMainWindow
     helvetica = FXFont.new(app, "helvetica", 14)
 
     boton_volver_icon =FXPNGIcon.new(app, File.open("exit.png", "rb").read)
-    boton_volver=FXButton.new(self,"",:icon=>boton_volver_icon, :opts=>LAYOUT_EXPLICIT|JUSTIFY_CENTER_X, :width=>66, :height=>66,:x=>0, :y=>0)
+    boton_volver=FXButton.new(self,"",:icon=>boton_volver_icon, :opts=>LAYOUT_EXPLICIT|JUSTIFY_CENTER_X, :width=>66, :height=>66,:x=>430, :y=>-10)
     boton_volver.backColor= FXRGB(165,249,229)
     boton_volver.connect(SEL_COMMAND) do
       volver()
